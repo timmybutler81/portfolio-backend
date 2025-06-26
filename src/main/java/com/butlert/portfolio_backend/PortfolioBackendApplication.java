@@ -19,25 +19,16 @@ public class PortfolioBackendApplication {
 	@Bean
 	CommandLineRunner init(ProjectRepository repo) {
 		return args -> {
-			System.out.println("Seeding sample projects...");
-
-			repo.save(new Project(
-					null,
-					"Trading Card Manager",
-					"JavaFX app to manage and track trading cards.",
-					"https://github.com/Timothy/tradingcardmanager",
-					"",
-					List.of("Java", "JavaFX", "OOP")
-			));
-
-			repo.save(new Project(
-					null,
-					"Expense Tracker API",
-					"Spring Boot API for managing personal expenses.",
-					"https://github.com/Timothy/expense-tracker",
-					"https://demo.example.com",
-					List.of("Spring Boot", "REST API", "Budgeting")
-			));
+			if (repo.count() == 0) {                // ⬅️  guard
+				repo.save(new Project(null, "Trading Card Manager",
+						"JavaFX app to manage trading cards.",
+						"https://github.com/timmybutler81/TradingCardManager",
+						"", List.of("Java","OOP")));
+				repo.save(new Project(null, "Expense Tracker API",
+						"Spring Boot API for personal finances.",
+						"https://github.com/Timothy/expense-tracker",
+						"https://demo.example.com", List.of("Spring Boot","REST")));
+			}
 		};
 	}
 }

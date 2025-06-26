@@ -5,6 +5,7 @@ import com.butlert.portfolio_backend.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -22,5 +23,10 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     public Project createProject(Project project) {
         return repository.save(project);
+    }
+
+    @Override
+    public Optional<Project> getProjectById(Long id) {
+        return repository.findById(id);
     }
 }
